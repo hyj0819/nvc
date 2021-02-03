@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{header/header}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雷士照明管理平台</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/login.css}">
+  <!--  <script src="js/jquery.min.js"></script>-->
+    <script th:src="@{js/layui-v2.5.5/layui/layui.js}"></script>
+<!--    <script type="text/javascript" th:src="@{lib/layui/layui.js}"></script>-->
+    <script src="js/common/common.js"></script>
+    <script src="js/login/login.js"></script>
+
+</head>
+<body>
+<div id="wrapper" class="login-page">
+    <div id="login_form" class="form">
+        <form class="register-form">
+            <input type="text" placeholder="用户名" value=""/>
+            <input type="password" placeholder="密码" />
+            <input type="text" placeholder="电子邮件" />
+            <button id="create">创建账户</button>
+            <p class="message">已经有了一个账户? <a href="#">立刻登录</a></p>
+        </form>
+
+        <form class="layui-form">
+            <h2>管理登录</h2>
+            <input type="text" placeholder="用户名" id="usercode" name="usercode" class="layui-input" />
+            <input type="password" placeholder="密码" id="password" name="password" class="layui-input"/>
+            <button id="login" lay-submit="" lay-filter="login">登　录</button>
+            <p class="message">还没有账户? <a href="#">立刻创建</a></p>
+        </form>
+    </div>
+</div>
+</body>
+</html>
