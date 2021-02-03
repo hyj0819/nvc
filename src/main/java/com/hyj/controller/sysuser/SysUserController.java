@@ -36,9 +36,11 @@ public class SysUserController {
     }
 
     /**
-     *  @author: heyongjun
-     *  @Date: 2019-10-27 14:21
-     *  @Description:登陆系统
+     * @功能描述:查询用户列表
+     * @params:
+     * @return:
+     * @author: heyongjun
+     * @time: 2021-02-03 16:39
      */
 
     @RequestMapping("/sysuserlistinfo")
@@ -75,6 +77,39 @@ public class SysUserController {
         //用了一个字符串拼接的方式，使返回的数据变成Layui的支持的数据类型
         return userInfo;
     }
+
+
+    /**
+     * @功能描述:删除用户信息
+     * @params:
+     * @return:
+     * @author: heyongjun
+     * @time: 2021-02-03 16:39
+     */
+
+    @RequestMapping("/delsysuserinfo")
+    @ResponseBody
+    public String delsysuserinfo(HttpServletRequest request,HttpServletResponse httpresponse, @RequestParam Map paramMap,@RequestBody(required = false) Map paramBody){
+        Enumeration<String> headers = request.getHeaderNames();
+        Map<String, String> requestHeaders = new HashMap<>();
+        //把所有的头部信息放入requestHeaders
+        while (headers.hasMoreElements()) {
+            String key = headers.nextElement();
+            String value = request.getHeader(key);
+            requestHeaders.put(key, value);
+        }
+        requestHeaders.put("x-forwarded-for", request.getRemoteAddr());
+        //请求参数
+        JSONObject param = new JSONObject(paramMap);
+        if (paramBody != null) {
+            param.putAll(paramBody);
+        }
+        boolean falg = sysUserService.delSysUserInfo(param);
+        JSONObject returnJson = new JSONObject();
+        returnJson.put("success",falg);
+        return returnJson.toJSONString();
+    }
+
 
 
 }

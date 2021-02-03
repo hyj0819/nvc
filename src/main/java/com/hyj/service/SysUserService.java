@@ -22,4 +22,23 @@ public class SysUserService {
     public Page querySysUserInfo(JSONObject json,Pageable pageable){
         return nvcUserInfoDAO.findAll(pageable);
     }
+
+    /**
+     * @功能描述:删除用户信息
+     * @params:
+     * @return:
+     * @author: heyongjun
+     * @time: 2021-02-03 16:41
+     */
+
+    public boolean delSysUserInfo(JSONObject json){
+        try{
+            Long id = json.getLong("id");
+            nvcUserInfoDAO.deleteById(id);
+            return true;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }
