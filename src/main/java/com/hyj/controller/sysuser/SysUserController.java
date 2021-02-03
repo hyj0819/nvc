@@ -59,10 +59,10 @@ public class SysUserController {
             param.putAll(paramBody);
         }
         PageRequest pageRequest = null;
-        pageRequest =  PageRequest.of(0, 5);
+        pageRequest =  PageRequest.of(param.getInteger("page")-1, param.getInteger("limit"));
         Page sysUserInfo =  sysUserService.querySysUserInfo(param,pageRequest);
         List<NvcUserInfo> nvcUserInfo  = sysUserInfo.getContent();
-        Map<String,Object> resultMap = new HashMap<>();
+        /*Map<String,Object> resultMap = new HashMap<>();
         //状态码，成功0，失败1
         resultMap.put("code","0");
         //提示消息
@@ -70,8 +70,10 @@ public class SysUserController {
         //数据（表格填充数据）
         resultMap.put("data",JSONObject.toJSONString(nvcUserInfo));
         //分页总条数
-        resultMap.put("count",sysUserInfo.getTotalPages());
-        return resultMap.toString();
+        resultMap.put("count",sysUserInfo.getTotalPages());*/
+        String userInfo="{\"code\":\"0\",\"msg\":\"ok\",\"count\":"+sysUserInfo.getContent().size()+",\"data\":"+JSONObject.toJSONString(nvcUserInfo)+"}";
+        //用了一个字符串拼接的方式，使返回的数据变成Layui的支持的数据类型
+        return userInfo;
     }
 
 
