@@ -48,7 +48,7 @@ layui.use('table', function(){
             layer.confirm('确认删除此用户?', function(index){
                 //向服务端发送删除指令
                 delSysUser(data.id);
-
+                layer.close(index);
             });
         } else if(layEvent === 'edit'){
             layer.msg('编辑操作');
@@ -69,8 +69,13 @@ layui.use('table', function(){
             contentType: 'application/json',
             dataType : 'json',
             success:function(data){
-                if(data.success == 'true'){
-                    layer.close(index);
+                if(data.success ==true){
+                    layer.msg("删除成功", {
+                        icon: 6,//成功的表情
+                        time: 2000 //1秒关闭（如果不配置，默认是3秒）
+                    }, function(){
+                        location.reload();
+                    });
                 }else{
                     /*layer.msg(data.msg, {
                         icon: 6,//成功的表情
