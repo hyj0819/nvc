@@ -2,12 +2,11 @@ layui.use('table', function(){
     var table = layui.table;
     var $ = layui.jquery,form = layui.form;
     table.render({
-        elem: '#demo'
+         elem: '#demo'
         ,url:'/nvc/sysuser/sysuserlistinfo'
         ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-
         ,page: true //开启分页
-        ,toolbar: 'default'
+        ,toolbar: '#toolbarDemo'
         ,cols: [[
             {type:'checkbox'},
             {field:'id', width:80, title: 'ID', sort: true}
@@ -17,7 +16,7 @@ layui.use('table', function(){
             ,{field:'phone', title: '联系电话', width: '30%', minWidth: 100} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
             ,{field:'address', title: '联系地址', sort: true}
             ,{field:'userstatus', title: '状态', sort: true},
-            {fixed: 'right', width:150, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
+            {fixed: 'right',title: '操作', width:150, align:'center', toolbar: '#barDemo'} //这里的toolbar值是模板元素的选择器
         ]],
         done: function(res, curr, count){
             $(".layui-table-box").find("[data-field='id']").css("display","none");
@@ -56,6 +55,7 @@ layui.use('table', function(){
     });
 
 
+
     /**
      * 删除用户信息
      */
@@ -77,12 +77,7 @@ layui.use('table', function(){
                         location.reload();
                     });
                 }else{
-                    /*layer.msg(data.msg, {
-                        icon: 6,//成功的表情
-                        time: 1000 //1秒关闭（如果不配置，默认是3秒）
-                    }, function(){
-                        location.reload();
-                    });*/
+                    layer.msg("删除失败");
                     layer.close(index);
                 }
             },
@@ -92,7 +87,29 @@ layui.use('table', function(){
         });
     }
 
+    //查询列表
+    $('#querySysUser').on('click', function() {
+        var username = $("#username").val();
+        var address = $("#address").val();
+        var phone = $("#phone").val();
+        var status = $("#status option:selected").val();
+        table.reload('demo', {
+            url : "/nvc/sysuser/sysuserlistinfo",
+            method : 'post',
+            contentType: 'application/json',
+            dataType : 'json',
+            where : {
+                username : $('#username').val(),
+                address : address,
+                phone : phone,
+                status : status
+            },
+            page : {
+                curr : 1
+            }
+        });
+        return false;
+    });
+
 
 });
-
-

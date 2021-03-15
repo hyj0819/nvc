@@ -2,37 +2,156 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{header/header}">
 <head>
-  <head>
-    <meta charset="UTF-8">
-    <title>欢迎页面-L-admin1.0</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="../js/layui-v2.5.5/layui/css/layui.css">
-    <script src="../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
-    <script th:src="@{/js/sysuser/sysuserlist.js}"></script>
-  </head>
-  <body class="layui-anim layui-anim-up">
-    <div class="x-nav">
-      <span class="layui-breadcrumb">
-        <a href="">用户管理</a>
-        <a href="">用户列表</a>
-        <a>
-          <cite>用户列表详情</cite></a>
-      </span>
+    <head>
+        <meta charset="UTF-8">
+        <title>欢迎页面-L-admin1.0</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="../js/layui-v2.5.5/layui/css/layui.css">
+        <script src="../js/jquery.min.js"></script>
+        <script type="text/javascript" src="../lib/layui/layui.js" charset="utf-8"></script>
+        <script th:src="@{/js/sysuser/sysuserlist.js}"></script>
+    </head>
+<body >
+<div class="layui-row" id="EditUser" style="display:none;">
+    <div class="layui-col-md10">
+        <form class="layui-form layui-from-pane" id="updateUser"   style="margin-top:20px" >
+
+            <input type="hidden" name="isadmin" id="isadmin">
+            <input type="hidden" name="id" id="id">
+            <input type="hidden" name="isforbid" id="isforbid">
+            <input type="hidden" name="isable" id="isable">
+            <input type="hidden" name="rtime" id="rtime">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="fname" id="fname"  required  lay-verify="required" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">手机号</label>
+                <!--<div class="layui-input-block">
+                    <input type="text" name="phone" id="phone" required  lay-verify="required" autocomplete="off" placeholder="请输入手机号" class="layui-input">
+                </div>-->
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input type="text" name="email" id="email" required  lay-verify="required" autocomplete="off" placeholder="请输入邮箱" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="text" name="password" id="password" required  lay-verify="required" autocomplete="off" placeholder="请输入密码" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">真实姓名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" id="name" required  lay-verify="required" autocomplete="off" placeholder="请输入真实姓名" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item" id="showImg">
+                <label class="layui-form-label">头像</label>
+                <div class="layui-input-block">
+                    <img class="layui-upload-img"  id="imgshow" src="" style="width:100px;height:100px;" >
+                </div>
+            </div>
+
+
+            <div  class="layui-upload"  id="updateImg">
+                <button type="button"  class="layui-btn layui-btn-primary" id="img" style="margin-top: 30px;margin-left: 10px">修改头像</button>
+                <div class="layui-upload-list" style="margin-left: 120px;margin-top: -50px"  >
+                    <img class="layui-upload-img" id="demo1" src="" style="width:100px;height:100px;" >
+                    <p id="demoText"></p>
+                </div>
+            </div>
+
+            <input type="hidden" name="headimg" id="headimg" value="" >
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">自我介绍</label>
+                <div class="layui-input-block">
+                    <input type="text" name="introduce" id="introduce" required  lay-verify="required" autocomplete="off" placeholder="请输入自我介绍" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item" style="margin-top:40px" id="check">
+                <div class="layui-input-block">
+                    <button class="layui-btn  layui-btn-submit " lay-submit="" lay-filter="formDemo" >确认修改</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="x-body">
-
-      <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-      </script>
-
-      <table id="demo" lay-filter="test"></table>
+</div>
+<div style="padding: 15px">
+<form class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-inline">
+                <input type="text" id="username"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">联系地址</label>
+            <div class="layui-input-inline">
+                <input type="text" id="address"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">联系电话</label>
+            <div class="layui-input-inline">
+                <input type="text" id="phone"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-inline">
+                <select name="modules" id="status"  lay-search="">
+                    <option value="">请选择</option>
+                    <option value="1">启用</option>
+                    <option value="0">停用</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <button class="layui-btn" id="querySysUser" lay-submit
+                        lay-filter="formDemo" data-type="reload" style="margin-left: 15px">
+                    <i class="layui-icon layui-icon-search"></i> 查询
+                </button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
     </div>
-  </body>
+</form>
+</div>
 
+<table class="layui-hide" id="demo" lay-filter="test"></table>
+
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckData">新增</button>
+        <button class="layui-btn layui-btn-sm" lay-event="getCheckLength">编辑</button>
+        <button class="layui-btn layui-btn-sm" lay-event="isAll">删除</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+</body>
 </html>

@@ -2,12 +2,14 @@ package com.hyj.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hyj.dao.NvcUserInfoDAO;
+import com.hyj.model.NvcUserInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Component
 public class SysUserService {
@@ -19,8 +21,8 @@ public class SysUserService {
      *  @Date: 2019-12-09 16:44
      *  @Description: 分页查询用户列表
      */
-    public Page querySysUserInfo(JSONObject json,Pageable pageable){
-        return nvcUserInfoDAO.findAll(pageable);
+    public List<NvcUserInfo> querySysUserInfo(JSONObject json){
+        return nvcUserInfoDAO.querySysUser(json);
     }
 
     /**

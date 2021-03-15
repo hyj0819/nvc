@@ -1,6 +1,8 @@
 package com.hyj.controller.sysuser;
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hyj.model.NvcUserInfo;
 import com.hyj.service.SysUserService;
 import org.springframework.data.domain.Page;
@@ -62,18 +64,10 @@ public class SysUserController {
         }
         PageRequest pageRequest = null;
         pageRequest =  PageRequest.of(param.getInteger("page")-1, param.getInteger("limit"));
-        Page sysUserInfo =  sysUserService.querySysUserInfo(param,pageRequest);
-        List<NvcUserInfo> nvcUserInfo  = sysUserInfo.getContent();
-        /*Map<String,Object> resultMap = new HashMap<>();
-        //状态码，成功0，失败1
-        resultMap.put("code","0");
-        //提示消息
-        resultMap.put("msg","");
-        //数据（表格填充数据）
-        resultMap.put("data",JSONObject.toJSONString(nvcUserInfo));
-        //分页总条数
-        resultMap.put("count",sysUserInfo.getTotalPages());*/
-        String userInfo="{\"code\":\"0\",\"msg\":\"ok\",\"count\":"+sysUserInfo.getContent().size()+",\"data\":"+JSONObject.toJSONString(nvcUserInfo)+"}";
+        PageHelper.startPage(pageRequest.getPageNumber(),pageRequest.getPageSize());
+        List<NvcUserInfo> list =  sysUserService.querySysUserInfo(param);
+        PageInfo pageInfo = new PageInfo(list,pageRequest.getPageSize());
+        String userInfo="{\"code\":\"0\",\"msg\":\"ok\",\"count\":"+pageInfo.getList().size()+",\"data\":"+JSONObject.toJSONString(pageInfo.getList())+"}";
         //用了一个字符串拼接的方式，使返回的数据变成Layui的支持的数据类型
         return userInfo;
     }

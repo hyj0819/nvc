@@ -12,7 +12,7 @@ import java.util.List;
  * @time: 2021-02-02 14:26
  */
 @Repository
-public interface NvcUserInfoDAO extends JpaRepository<NvcUserInfo,Long> {
+public interface NvcUserInfoDAO extends JpaRepository<NvcUserInfo,Long>,NvcUserInfoDAOCustom<NvcUserInfo,Long> {
 
   public  List<NvcUserInfo> findByUsernoAndUserpwdAndUserstatus(String userno, String userpwd, String status);
 }
