@@ -7,8 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Component
@@ -23,6 +25,28 @@ public class SysUserService {
      */
     public List<NvcUserInfo> querySysUserInfo(JSONObject json){
         return nvcUserInfoDAO.querySysUser(json);
+    }
+
+    /**
+     * @功能描述: 添加用户信息
+     * @params:
+     * @return:
+     * @author: heyongjun
+     * @time: 2021-03-16 9:39
+     */
+    @Transactional
+    public boolean addSysUserInfo(JSONObject json){
+        try{
+            NvcUserInfo nvcUserInfo =  JSONObject.parseObject(json.toJSONString(),NvcUserInfo.class);
+            nvcUserInfo.setUserstatus("1");
+            nvcUserInfo.setInputdate(new Timestamp(System.currentTimeMillis()));
+            nvcUserInfo.setUserno(String.valueOf(nvcUserInfoDAO.findMaxUserNo()+1));
+            nvcUserInfoDAO.save(nvcUserInfo);
+            return true;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     /**

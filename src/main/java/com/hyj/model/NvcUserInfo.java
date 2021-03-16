@@ -3,6 +3,7 @@ package com.hyj.model;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "NVC_USERINFO")
@@ -16,12 +17,13 @@ public class NvcUserInfo {
     private String address;//地址
     private String age;//年龄
     private String sex;//性别
+    private Timestamp inputdate;//录入时间
 
 
     public NvcUserInfo() {
     }
 
-    public NvcUserInfo(Long id, String userno, String userpwd, String userstatus, String username, String phone, String address, String age, String sex) {
+    public NvcUserInfo(Long id, String userno, String userpwd, String userstatus, String username, String phone, String address, String age, String sex,Timestamp inputdate) {
         this.id = id;
         this.userno = userno;
         this.userpwd = userpwd;
@@ -31,10 +33,13 @@ public class NvcUserInfo {
         this.address = address;
         this.age = age;
         this.sex=sex;
+        this.inputdate = inputdate;
     }
 
-    @Id	//主键id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)//主键生成策略1
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "custom-id")
+    @GenericGenerator(name = "custom-id", strategy = "com.hyj.manage.CustomIDGenerator")
+    @Column(name = "ID")
     public Long getId() {
         return this.id;
     }
@@ -108,5 +113,14 @@ public class NvcUserInfo {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    @Column(name = "INPUTDATE", length = 6)
+    public Timestamp getInputdate() {
+        return this.inputdate;
+    }
+
+    public void setInputdate(Timestamp inputdate) {
+        this.inputdate = inputdate;
     }
 }

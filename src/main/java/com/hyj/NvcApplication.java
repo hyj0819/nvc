@@ -1,6 +1,9 @@
 package com.hyj;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
+import org.apache.ibatis.plugin.Interceptor;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,13 +19,15 @@ public class NvcApplication {
 
     @Bean
     public PageHelper pageHelper() {
-        System.out.println("MyBatisConfiguration.pageHelper()");
+        System.out.println("======MyBatisConfiguration.pageHelper()");
         PageHelper pageHelper = new PageHelper();
-        Properties p = new Properties();
-        p.setProperty("offsetAsPageNum", "true");
-        p.setProperty("rowBoundsWithCount", "true");
-        p.setProperty("reasonable", "true");
-        pageHelper.setProperties(p);
+        Properties properties = new Properties();
+        properties.setProperty("reasonable", "true");
+        properties.setProperty("supportMethodsArguments", "true");
+        properties.setProperty("params", "count=countSql");
+        pageHelper.setProperties(properties);
+        new JSONObject();
+        //添加插件
         return pageHelper;
     }
 }

@@ -2,6 +2,7 @@ package com.hyj.dao;
 
 import com.hyj.model.NvcUserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,4 +16,6 @@ import java.util.List;
 public interface NvcUserInfoDAO extends JpaRepository<NvcUserInfo,Long>,NvcUserInfoDAOCustom<NvcUserInfo,Long> {
 
   public  List<NvcUserInfo> findByUsernoAndUserpwdAndUserstatus(String userno, String userpwd, String status);
+
+
 }

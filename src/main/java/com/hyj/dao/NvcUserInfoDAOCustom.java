@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,4 +20,13 @@ import java.util.List;
 public interface NvcUserInfoDAOCustom<NvcUserInfo,Long>  {
 
    public  List<NvcUserInfo> querySysUser(JSONObject json);
+
+   /**
+    * @功能描述:查询最大的用户账户
+    * @params:
+    * @return:
+    * @author: heyongjun
+    * @time: 2021-03-16 10:57
+    */
+   public Long findMaxUserNo();
 }

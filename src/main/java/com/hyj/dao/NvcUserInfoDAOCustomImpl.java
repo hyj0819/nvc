@@ -1,8 +1,8 @@
 package com.hyj.dao;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.hyj.model.NvcUserInfo;
-import com.sun.org.apache.xpath.internal.operations.String;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,11 +22,9 @@ import java.util.List;
  * @time: 2021-02-02 14:26
  */
 @Repository
-public class NvcUserInfoDAOCustomImpl implements NvcUserInfoDAOCustom{
-
+public class NvcUserInfoDAOCustomImpl  implements NvcUserInfoDAOCustom {
   @Autowired
-  private EntityManager entityManager;
-
+  public EntityManager entityManager;
 
   @Override
   public List<NvcUserInfo> querySysUser(JSONObject json) {
@@ -44,5 +42,19 @@ public class NvcUserInfoDAOCustomImpl implements NvcUserInfoDAOCustom{
       sb.append(" and u.userstatus ='"+json.getString("status")+"' ");
     }
     return entityManager.createNativeQuery(sb.toString(),NvcUserInfo.class).getResultList();
+  }
+
+  /**
+   * @功能描述:查询最大的用户账户号
+   * @params:
+   * @return:
+   * @author: heyongjun
+   * @time: 2021-03-16 10:57
+   */
+
+  @Override
+  public Long findMaxUserNo() {
+    StringBuffer sb = new StringBuffer(" select max(userno) from nvc_userinfo ");
+    return Long.valueOf(entityManager.createNativeQuery(sb.toString()).getSingleResult().toString());
   }
 }
