@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class SysUserService {
@@ -60,8 +61,13 @@ public class SysUserService {
     public boolean delSysUserInfo(JSONObject json){
         try{
             Long id = json.getLong("id");
-            nvcUserInfoDAO.deleteById(id);
-            return true;
+            Optional<NvcUserInfo> nvcUserInfo = nvcUserInfoDAO.findById(id);
+            if(nvcUserInfo.isPresent()){
+                nvcUserInfo.get().setUserstatus("0");
+                nvcUserInfoDAO.save(nvcUserInfo.get());
+                return true;
+            }
+            return  false;
         }catch (Exception ex){
             ex.printStackTrace();
             return false;

@@ -20,7 +20,7 @@ layui.use('table', function(){
             ,{field:'inputdate', title: '录入时间', align:'center' ,templet :function (row){
                     return FormatTime(row.inputdate);
                 }}
-            ,{fixed: 'right',title: '操作', align:'center', toolbar: '#barDemo',width:'5%'} //这里的toolbar值是模板元素的选择器
+            ,{fixed: 'right',title: '操作', align:'center', toolbar: '#barDemo',width:165} //这里的toolbar值是模板元素的选择器
         ]],
         done: function(res, curr, count){
             $(".layui-table-box").find("[data-field='id']").css("display","none");
@@ -78,9 +78,7 @@ layui.use('table', function(){
 
 
 
-    /**
-     * 删除用户信息
-     */
+    //删除用户信息
     function delSysUser(id) {
         var param = new Object();
         param.id = id;
@@ -131,6 +129,24 @@ layui.use('table', function(){
             }
         });
         return false;
+    });
+
+    $("#adduser").on('click',function () {
+        layer.open({
+            type: 1,
+            title:"新增用户信息",
+            closeBtn: false,
+            shift: 2,
+            area: ['400px', '450px'],
+            shadeClose: true,
+            // btn: ['新增', '取消'],
+            // btnAlign: 'c',
+            content: $("#add-user"),
+            success: function(layero, index){
+            },
+            yes:function(){
+            }
+        });
     });
 
     layui.use(['form'], function () {
