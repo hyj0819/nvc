@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{header/header}">
         <meta charset="UTF-8">
         <title>欢迎页面-L-admin1.0</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="../css/font.css">
-        <link rel="stylesheet" href="../css/xadmin.css">
+        <link rel="stylesheet"  th:href="@{/css/font.css}" />
+        <link rel="stylesheet" th:href="@{/css/xadmin.css}"/>
     </head>
     <body>
     <div class="x-body layui-anim layui-anim-up">
-        <blockquote class="layui-elem-quote">欢迎管理员：
-            <span class="x-red">test</span>！当前时间:2018-04-25 20:50:53</blockquote>
+        <blockquote class="layui-elem-quote">欢迎使用TB管理系统 管理员：
+            <span class="x-red">何勇军</span>！当前时间:2021-04-21 14:19:53</blockquote>
         <fieldset class="layui-elem-field">
             <legend>数据统计</legend>
             <div class="layui-field-box">
@@ -25,7 +25,7 @@
                                     <ul class="layui-row layui-col-space10 layui-this">
                                         <li class="layui-col-xs2">
                                             <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>文章数</h3>
+                                                <h3>商品数</h3>
                                                 <p>
                                                     <cite>66</cite></p>
                                             </a>
@@ -37,34 +37,7 @@
                                                     <cite>12</cite></p>
                                             </a>
                                         </li>
-                                        <li class="layui-col-xs2">
-                                            <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>回复数</h3>
-                                                <p>
-                                                    <cite>99</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs2">
-                                            <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>商品数</h3>
-                                                <p>
-                                                    <cite>67</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs2">
-                                            <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>文章数</h3>
-                                                <p>
-                                                    <cite>67</cite></p>
-                                            </a>
-                                        </li>
-                                        <li class="layui-col-xs2">
-                                            <a href="javascript:;" class="x-admin-backlog-body">
-                                                <h3>文章数</h3>
-                                                <p>
-                                                    <cite>6766</cite></p>
-                                            </a>
-                                        </li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -80,12 +53,12 @@
                     <tbody>
                         <tr>
                             <td >
-                                <a class="x-a" href="/" target="_blank">新版L-admin 2.0上线了</a>
+                                <a class="x-a" href="/" target="_blank">TB上线了</a>
                             </td>
                         </tr>
                         <tr>
                             <td >
-                                <a class="x-a" href="/" target="_blank">交流qq:(370946531)</a>
+                                <a class="x-a" href="/" target="_blank">开发人员联系电话:(18813091329)</a>
                             </td>
                         </tr>
                     </tbody>
@@ -98,38 +71,9 @@
                 <table class="layui-table">
                     <tbody>
                         <tr>
-                            <th>xxx版本</th>
-                            <td>1.0.180420</td></tr>
-                        <tr>
-                            <th>服务器地址</th>
-                            <td>#</td></tr>
-                        <tr>
-                            <th>操作系统</th>
-                            <td>WINNT</td></tr>
-                        <tr>
-                            <th>运行环境</th>
-                            <td>Apache/2.4.23 (Win32) OpenSSL/1.0.2j mod_fcgid/2.3.9</td></tr>
-                        <tr>
-                            <th>PHP版本</th>
-                            <td>5.6.27</td></tr>
-                        <tr>
-                            <th>PHP运行方式</th>
-                            <td>cgi-fcgi</td></tr>
-                        <tr>
-                            <th>MYSQL版本</th>
-                            <td>5.5.53</td></tr>
-                        <tr>
-                            <th>ThinkPHP</th>
-                            <td>5.0.18</td></tr>
-                        <tr>
-                            <th>上传附件限制</th>
-                            <td>2M</td></tr>
-                        <tr>
-                            <th>执行时间限制</th>
-                            <td>30s</td></tr>
-                        <tr>
-                            <th>剩余空间</th>
-                            <td>86015.2M</td></tr>
+                            <th>稳定版本</th>
+                            <td>1.0</td></tr>
+
                     </tbody>
                 </table>
             </div>
@@ -141,17 +85,18 @@
                     <tbody>
                         <tr>
                             <th>版权所有</th>
-                            <td>cdnuti(xuebingsi)
-                                <a href="http://#/" class='x-a' target="_blank">访问官网</a></td>
+                            <td>heyongjun
+                               <!-- <a href="http://#/" class='x-a' target="_blank">访问官网</a><-->
+                                </td>
                         </tr>
                         <tr>
                             <th>开发者</th>
-                            <td>along(370946531@qq.com)</td></tr>
+                            <td>heyongjun</td></tr>
                     </tbody>
                 </table>
             </div>
         </fieldset>
-        <blockquote class="layui-elem-quote layui-quote-nm">感谢layui,百度Echarts,jquery,本系统由L-admin提供技术支持。</blockquote>
+        <blockquote class="layui-elem-quote layui-quote-nm">为个体商户赋能是我们一直在做的</blockquote>
     </div>
    
     </body>

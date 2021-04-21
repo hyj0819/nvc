@@ -1,19 +1,10 @@
 package com.hyj.dao;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.hyj.model.NvcUserInfo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
-import javax.persistence.EntityManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -22,9 +13,9 @@ import java.util.List;
  * @time: 2021-02-02 14:26
  */
 @Repository
-public class NvcUserInfoDAOCustomImpl  implements NvcUserInfoDAOCustom {
-  @Autowired
-  public EntityManager entityManager;
+public class NvcUserInfoDAOCustomImpl extends BaseDAO  implements NvcUserInfoDAOCustom {
+
+
 
   @Override
   public List<NvcUserInfo> querySysUser(JSONObject json) {

@@ -1,7 +1,5 @@
 package com.hyj.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,7 +8,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "NVC_USERINFO")
 public class NvcUserInfo {
-    @JsonSerialize(using= ToStringSerializer.class)
     private Long id;
     private String userno;//'用户账户'
     private String userpwd;//'用户密码'
